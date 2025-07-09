@@ -21,6 +21,12 @@ class PlaPersonalSalidaFechaResource extends Resource
     protected static ?string $modelLabel = 'Permiso de Salida';
     protected static ?string $pluralModelLabel = 'Permisos de Salida';
 
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

@@ -26,7 +26,10 @@ class PlaPersonalSalidaResource extends Resource
     protected static ?string $navigationLabel = 'Personal Salidas';
     protected static ?string $modelLabel = 'Personal Salida';
     protected static ?string $pluralModelLabel = 'Personal Salidas';
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

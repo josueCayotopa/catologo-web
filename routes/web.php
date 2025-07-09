@@ -24,6 +24,14 @@ Route::prefix('')->name('catalogo.')->group(function () {
     //promociones 
     Route::get('/promociones', [CatalogoWebController::class, 'promociones'])->name('promociones');
     Route::get('/promociones/{id}', [CatalogoWebController::class, 'promocionDetalle'])->name('promociones.detalle');
+
+  
+
     // API endpoints
     Route::get('/api/especialidad/{codEspecialidad}', [CatalogoWebController::class, 'getProductsByEspecialidad'])->name('api.especialidad');
 });
+// Rutas de páginas específicas
+
+
+Route::get('/laboratorio', [CatalogoWebController::class, 'laboratorio'])->name('catalogo.laboratorio');
+Route::get('/imagen', [CatalogoWebController::class, 'imagen'])->name('catalogo.imagen');

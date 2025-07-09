@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\CatalogoWeb;
 use App\Models\MaeSucursal;
 use App\Models\CveEspecialidad;
@@ -82,7 +83,7 @@ class CatalogoWebController extends Controller
         $query = DB::table('CATALOGO_WEB')
             ->select([
                 'COD_ARTICULO_SERV', 'DES_ARTICULO', 'DES_CORTA',
-                'PRECIO_MOSTRAR', 'PRECIO_PROMOCION', 'COD_MONEDA',
+                'PRECIO_MOSTRAR', 'PRECIO_PROMOCION', 'MONEDA',
                 'IMAGEN_URL', 'IND_PROMOCION', 'IND_DESTACADO',
                 'COD_ESPECIALIDAD', 'CATEGORIA', 'TIPO_SERVICIO',
                 'ORDEN_MOSTRAR', 'FECHA_INICIO_PROMO', 'FECHA_FIN_PROMO',
@@ -141,14 +142,19 @@ class CatalogoWebController extends Controller
     /**
      * Obtener sucursales desde CATALOGO_WEB
      */
-    private function getSucursalesFromCatalogo()
+    private function getSucursalesFromCatalogo($categoria = null)
     {
         try {
-            $sucursalesEnCatalogo = DB::table('CATALOGO_WEB')
+            $query = DB::table('CATALOGO_WEB')
                 ->select('COD_SUCURSAL')
-                ->where('ESTADO', 'A')
-                ->distinct()
-                ->pluck('COD_SUCURSAL');
+                ->where('ESTADO', 'A');
+
+            // Filtrar por categoría si se especifica
+            if ($categoria) {
+                $query->where('CATEGORIA', $categoria);
+            }
+
+            $sucursalesEnCatalogo = $query->distinct()->pluck('COD_SUCURSAL');
 
             return MaeSucursal::select(['COD_SUCURSAL', 'NOM_SUCURSAL', 'DES_DIRECCION', 'NUM_TELEFONO'])
                 ->whereIn('COD_SUCURSAL', $sucursalesEnCatalogo)
@@ -197,7 +203,7 @@ class CatalogoWebController extends Controller
 
             return CveEspecialidad::select(['COD_ESPECIALIDAD', 'DES_ESPECIALIDAD'])
                 ->whereIn('COD_ESPECIALIDAD', $especialidadesEnCatalogo)
-                ->where('TIPO_ESTADO', 'ACT')
+                ->where('TIP_ESTADO', 'ACT')
                 ->orderBy('DES_ESPECIALIDAD')
                 ->get()
                 ->map(function($especialidad) {
@@ -277,7 +283,7 @@ class CatalogoWebController extends Controller
         try {
             $promociones = DB::table('CATALOGO_WEB')
                 ->select([
-                    'COD_ARTICULO_SERV', 'DES_ARTICULO', 'PRECIO_MOSTRAR', 
+                    'COD_ARTICULO_SERV', 'DES_ARTICULO', 'PRECIO_MOSTRAR',
                     'PRECIO_PROMOCION', 'IMAGEN_URL', 'COD_ESPECIALIDAD'
                 ])
                 ->where('COD_SUCURSAL', $sucursal)
@@ -319,7 +325,7 @@ class CatalogoWebController extends Controller
             'descripcion' => $product->DES_CORTA ?? $product->DES_ARTICULO,
             'precio' => $product->PRECIO_MOSTRAR,
             'precio_promocion' => $tienePromocion ? $product->PRECIO_PROMOCION : null,
-            'moneda' => $this->getMonedaSymbol($product->COD_MONEDA ?? 'PEN'),
+            'moneda' => $this->getMonedaSymbol($product->MONEDA ?? 'PEN'),
             'image' => $this->getProductImage($product->IMAGEN_URL),
             'promocion' => $tienePromocion,
             'destacado' => $product->IND_DESTACADO === 'S',
@@ -344,7 +350,7 @@ class CatalogoWebController extends Controller
     {
         $tienePromocion = $product->IND_PROMOCION === 'S' && !empty($product->PRECIO_PROMOCION);
         $esServicioConStock = in_array($product->CATEGORIA, ['LABORATORIO', 'IMAGEN', 'PROCEDIMIENTO']);
-        
+
         return [
             'id' => $product->COD_ARTICULO_SERV,
             'codigo' => $product->COD_ARTICULO_SERV,
@@ -353,7 +359,7 @@ class CatalogoWebController extends Controller
             'descripcion_larga' => $product->META_DESCRIPCION ?? $product->DES_CORTA,
             'precio' => $product->PRECIO_MOSTRAR,
             'precio_promocion' => $tienePromocion ? $product->PRECIO_PROMOCION : null,
-            'moneda' => $this->getMonedaSymbol($product->COD_MONEDA ?? 'PEN'),
+            'moneda' => $this->getMonedaSymbol($product->MONEDA ?? 'PEN'),
             'image' => $this->getProductImage($product->IMAGEN_URL),
             'promocion' => $tienePromocion,
             'destacado' => $product->IND_DESTACADO === 'S',
@@ -456,15 +462,15 @@ class CatalogoWebController extends Controller
     private function formatWhatsAppNumber($telefono)
     {
         if (empty($telefono)) return '51993521429';
-        
+
         // Limpiar el número
         $numero = preg_replace('/[^0-9]/', '', $telefono);
-        
+
         // Si no empieza con 51, agregarlo
         if (!str_starts_with($numero, '51')) {
             $numero = '51' . $numero;
         }
-        
+
         return $numero;
     }
 
@@ -474,16 +480,16 @@ class CatalogoWebController extends Controller
     public function show(Request $request, $codArticulo)
     {
         $sucursal = $request->get('sucursal', '004');
-        
+
         try {
             $product = DB::table('CATALOGO_WEB')
                 ->select([
                     'COD_ARTICULO_SERV', 'DES_ARTICULO', 'DES_CORTA',
-                    'PRECIO_MOSTRAR', 'PRECIO_PROMOCION', 'COD_MONEDA',
+                    'PRECIO_MOSTRAR', 'PRECIO_PROMOCION', 'MONEDA',
                     'IMAGEN_URL', 'IND_PROMOCION', 'IND_DESTACADO',
                     'COD_ESPECIALIDAD', 'CATEGORIA', 'TIPO_SERVICIO',
                     'DURACION_ESTIMADA', 'REQUIERE_CITA', 'DISPONIBLE',
-                    'HORARIO_DISPONIBLE', 'DIAS_DISPONIBLE', 'STOCK_DISPONIBLE',
+                    'HORARIO_ESPECIAL', 'DIAS_DISPONIBLE', 'STOCK_DISPONIBLE',
                     'META_DESCRIPCION', 'PALABRAS_CLAVE'
                 ])
                 ->where('COD_ARTICULO_SERV', $codArticulo)
@@ -496,7 +502,7 @@ class CatalogoWebController extends Controller
             }
 
             $productTransformed = $this->transformProductForShow($product);
-            
+
             // Obtener servicios relacionados de la misma especialidad
             $relatedProducts = $this->getRelatedServices($product->COD_ESPECIALIDAD, $sucursal, $codArticulo);
 
@@ -504,11 +510,10 @@ class CatalogoWebController extends Controller
             $sucursalInfo = $this->getSucursalInfo($sucursal);
 
             return view('catalogo.show', compact(
-                'productTransformed', 
+                'productTransformed',
                 'relatedProducts',
                 'sucursalInfo'
             ));
-
         } catch (\Exception $e) {
             \Log::error('Error en show: ' . $e->getMessage());
             abort(404, 'Error al cargar el servicio');
@@ -516,18 +521,321 @@ class CatalogoWebController extends Controller
     }
 
     /**
-     * Mostrar promociones destacadas
+     * Mostrar servicios de laboratorio
      */
+    public function laboratorio(Request $request)
+    {
+        try {
+            $sucursal = $request->get('sucursal');
+            $tipo_analisis = $request->get('tipo_analisis');
+            $search = $request->get('search');
+
+            // Obtener sucursales que tienen servicios de laboratorio en CATALOGO_WEB
+            $sucursales = $this->getSucursalesFromCatalogo('LABORATORIO');
+
+            // Definir sucursal actual
+            $sucursalActual = null;
+            if ($sucursal) {
+                $sucursalActual = $sucursales->where('COD_SUCURSAL', $sucursal)->first();
+            }
+
+            // Si no hay sucursal seleccionada o no se encuentra, usar la primera disponible
+            if (!$sucursalActual) {
+                $sucursalActual = $sucursales->first();
+                if ($sucursalActual) {
+                    $sucursal = $sucursalActual->COD_SUCURSAL;
+                }
+            }
+
+            // Si no hay sucursales con servicios de laboratorio, mostrar mensaje
+            if ($sucursales->isEmpty()) {
+                return view('catalogo.laboratorio')->with([
+                    'error' => 'No hay servicios de laboratorio disponibles en este momento',
+                    'sucursales' => collect(),
+                    'procedimientos' => collect(),
+                    'tiposAnalisis' => collect(),
+                    'paquetesLab' => collect()
+                ]);
+            }
+
+            // Obtener tipos de análisis disponibles con conteos
+            $tiposAnalisisQuery = DB::table('CATALOGO_WEB')
+                ->where('CATEGORIA', 'LABORATORIO')
+                ->where('ESTADO', 'A')
+                ->where('DISPONIBLE', 'S')
+                ->whereNotNull('SUBCATEGORIA')
+                ->where('SUBCATEGORIA', '!=', '');
+
+            if ($sucursal) {
+                $tiposAnalisisQuery->where('COD_SUCURSAL', $sucursal);
+            }
+
+            $tiposAnalisisData = $tiposAnalisisQuery
+                ->select('SUBCATEGORIA', DB::raw('COUNT(*) as total'))
+                ->groupBy('SUBCATEGORIA')
+                ->get();
+
+            // Mapear tipos de análisis con iconos
+            $tiposAnalisis = $tiposAnalisisData->map(function($tipo) {
+                $iconos = [
+                    'HEMATOLOGIA' => 'fas fa-tint',
+                    'BIOQUIMICA' => 'fas fa-flask',
+                    'MICROBIOLOGIA' => 'fas fa-microscope',
+                    'INMUNOLOGIA' => 'fas fa-shield-alt',
+                    'HORMONAS' => 'fas fa-dna',
+                    'ORINA' => 'fas fa-vial',
+                    'HECES' => 'fas fa-search',
+                    'GENETICA' => 'fas fa-dna',
+                    'TOXICOLOGIA' => 'fas fa-exclamation-triangle'
+                ];
+
+                return [
+                    'codigo' => $tipo->SUBCATEGORIA,
+                    'nombre' => ucfirst(strtolower($tipo->SUBCATEGORIA)),
+                    'total' => $tipo->total,
+                    'icono' => $iconos[$tipo->SUBCATEGORIA] ?? 'fas fa-flask'
+                ];
+            });
+
+            // Obtener procedimientos de laboratorio
+            $procedimientosQuery = DB::table('CATALOGO_WEB')
+                ->where('CATEGORIA', 'LABORATORIO')
+                ->where('ESTADO', 'A')
+                ->where('DISPONIBLE', 'S');
+
+            if ($sucursal) {
+                $procedimientosQuery->where('COD_SUCURSAL', $sucursal);
+            }
+
+            if ($tipo_analisis && $tipo_analisis !== 'all') {
+                $procedimientosQuery->where('SUBCATEGORIA', $tipo_analisis);
+            }
+
+            if ($search) {
+                $procedimientosQuery->where(function($q) use ($search) {
+                    $q->where('DES_ARTICULO', 'LIKE', "%{$search}%")
+                      ->orWhere('DES_CORTA', 'LIKE', "%{$search}%")
+                      ->orWhere('PALABRAS_CLAVE', 'LIKE', "%{$search}%");
+                });
+            }
+
+            $procedimientos = $procedimientosQuery
+                ->orderBy('IND_DESTACADO', 'DESC')
+                ->orderBy('ORDEN_MOSTRAR', 'ASC')
+                ->paginate(12);
+
+            // Paquetes de laboratorio (datos de ejemplo)
+            $paquetesLab = collect([
+                [
+                    'nombre' => 'Perfil Básico',
+                    'descripcion' => 'Análisis básicos para chequeo general',
+                    'precio' => 120.00,
+                    'precio_promocion' => 90.00,
+                    'promocion' => true,
+                    'incluye' => ['Hemograma completo', 'Glucosa', 'Colesterol total', 'Triglicéridos'],
+                    'tiempo_entrega' => '24 hrs',
+                    'ayuno_requerido' => true
+                ],
+                [
+                    'nombre' => 'Perfil Completo',
+                    'descripcion' => 'Análisis completos para evaluación integral',
+                    'precio' => 250.00,
+                    'precio_promocion' => null,
+                    'promocion' => false,
+                    'incluye' => ['Hemograma completo', 'Perfil lipídico', 'Función hepática', 'Función renal', 'Examen de orina'],
+                    'tiempo_entrega' => '48 hrs',
+                    'ayuno_requerido' => true
+                ]
+            ]);
+
+            return view('catalogo.laboratorio', compact(
+                'procedimientos',
+                'sucursales',
+                'sucursal',
+                'sucursalActual',
+                'tiposAnalisis',
+                'tipo_analisis',
+                'search',
+                'paquetesLab'
+            ));
+        } catch (\Exception $e) {
+            Log::error('Error en laboratorio: ' . $e->getMessage());
+            return view('catalogo.laboratorio')->with('error', 'Error al cargar servicios de laboratorio');
+        }
+    }
+
+    public function imagen(Request $request)
+    {
+        try {
+            $sucursal = $request->get('sucursal');
+            $tipo_estudio = $request->get('tipo_estudio');
+            $search = $request->get('search');
+
+            // Obtener sucursales que tienen servicios de imagen en CATALOGO_WEB
+            $sucursales = $this->getSucursalesFromCatalogo('IMAGEN');
+
+            // Definir sucursal actual
+            $sucursalActual = null;
+            if ($sucursal) {
+                $sucursalActual = $sucursales->where('COD_SUCURSAL', $sucursal)->first();
+            }
+
+            // Si no hay sucursal seleccionada o no se encuentra, usar la primera disponible
+            if (!$sucursalActual) {
+                $sucursalActual = $sucursales->first();
+                if ($sucursalActual) {
+                    $sucursal = $sucursalActual->COD_SUCURSAL;
+                }
+            }
+
+            // Si no hay sucursales con servicios de imagen, mostrar mensaje
+            if ($sucursales->isEmpty()) {
+                return view('catalogo.imagen')->with([
+                    'error' => 'No hay estudios de imagen disponibles en este momento',
+                    'sucursales' => collect(),
+                    'estudios' => collect(),
+                    'tiposEstudio' => collect(),
+                    'estudiosDestacados' => collect()
+                ]);
+            }
+
+            // Obtener tipos de estudios disponibles con conteos
+            $tiposEstudiosQuery = DB::table('CATALOGO_WEB')
+                ->where('CATEGORIA', 'IMAGEN')
+                ->where('ESTADO', 'A')
+                ->where('DISPONIBLE', 'S')
+                ->whereNotNull('SUBCATEGORIA')
+                ->where('SUBCATEGORIA', '!=', '');
+
+            if ($sucursal) {
+                $tiposEstudiosQuery->where('COD_SUCURSAL', $sucursal);
+            }
+
+            $tiposEstudiosData = $tiposEstudiosQuery
+                ->select('SUBCATEGORIA', DB::raw('COUNT(*) as total'))
+                ->groupBy('SUBCATEGORIA')
+                ->get();
+
+            // Mapear tipos de estudios con iconos
+            $tiposEstudio = $tiposEstudiosData->map(function($tipo) {
+                $iconos = [
+                    'RADIOGRAFIA' => 'fas fa-x-ray',
+                    'ECOGRAFIA' => 'fas fa-heartbeat',
+                    'TOMOGRAFIA' => 'fas fa-brain',
+                    'RESONANCIA' => 'fas fa-head-side-brain',
+                    'MAMOGRAFIA' => 'fas fa-female',
+                    'DENSITOMETRIA' => 'fas fa-bone',
+                    'ENDOSCOPIA' => 'fas fa-search-plus'
+                ];
+
+                return [
+                    'codigo' => $tipo->SUBCATEGORIA,
+                    'nombre' => ucfirst(strtolower($tipo->SUBCATEGORIA)),
+                    'total' => $tipo->total,
+                    'icono' => $iconos[$tipo->SUBCATEGORIA] ?? 'fas fa-x-ray'
+                ];
+            });
+
+            // Obtener estudios de imagen
+            $estudiosQuery = DB::table('CATALOGO_WEB')
+                ->where('CATEGORIA', 'IMAGEN')
+                ->where('ESTADO', 'A')
+                ->where('DISPONIBLE', 'S');
+
+            if ($sucursal) {
+                $estudiosQuery->where('COD_SUCURSAL', $sucursal);
+            }
+
+            if ($tipo_estudio && $tipo_estudio !== 'all') {
+                $estudiosQuery->where('SUBCATEGORIA', $tipo_estudio);
+            }
+
+            if ($search) {
+                $estudiosQuery->where(function($q) use ($search) {
+                    $q->where('DES_ARTICULO', 'LIKE', "%{$search}%")
+                      ->orWhere('DES_CORTA', 'LIKE', "%{$search}%")
+                      ->orWhere('PALABRAS_CLAVE', 'LIKE', "%{$search}%");
+                });
+            }
+
+            $estudios = $estudiosQuery
+                ->orderBy('IND_DESTACADO', 'DESC')
+                ->orderBy('ORDEN_MOSTRAR', 'ASC')
+                ->paginate(12);
+
+            // Obtener estudios destacados
+            $estudiosDestacadosQuery = DB::table('CATALOGO_WEB')
+                ->where('CATEGORIA', 'IMAGEN')
+                ->where('ESTADO', 'A')
+                ->where('DISPONIBLE', 'S')
+                ->where('IND_DESTACADO', 'S');
+
+            if ($sucursal) {
+                $estudiosDestacadosQuery->where('COD_SUCURSAL', $sucursal);
+            }
+
+            $estudiosDestacados = $estudiosDestacadosQuery
+                ->orderBy('ORDEN_MOSTRAR', 'ASC')
+                ->limit(6)
+                ->get();
+
+            return view('catalogo.imagen', compact(
+                'estudios',
+                'sucursales',
+                'sucursal',
+                'sucursalActual',
+                'tiposEstudio',
+                'tipo_estudio',
+                'search',
+                'estudiosDestacados'
+            ));
+        } catch (\Exception $e) {
+            Log::error('Error en imagen: ' . $e->getMessage());
+            return view('catalogo.imagen')->with('error', 'Error al cargar estudios de imagen');
+        }
+    }
+
     public function promociones(Request $request)
     {
-        $sucursal = $request->get('sucursal', '004');
-        $sucursales = $this->getSucursalesFromCatalogo();
-        $sucursalActual = $sucursales->where('COD_SUCURSAL', $sucursal)->first();
-        $promociones = $this->getPromocionesFromCatalogo($sucursal);
+        try {
+            $sucursalSeleccionada = $request->get('sucursal');
 
-        return view('catalogo.promociones', compact(
-            'promociones', 'sucursales', 'sucursalActual', 'sucursal'
-        ));
+            // Obtener sucursales que tienen promociones en CATALOGO_WEB
+            $sucursalesConPromociones = DB::table('CATALOGO_WEB')
+                ->select('COD_SUCURSAL')
+                ->where('ESTADO', 'A')
+                ->where('IND_PROMOCION', 'S')
+                ->distinct()
+                ->pluck('COD_SUCURSAL');
+
+            $sucursales = MaeSucursal::select(['COD_SUCURSAL', 'NOM_SUCURSAL', 'DES_DIRECCION'])
+                ->whereIn('COD_SUCURSAL', $sucursalesConPromociones)
+                ->where('IND_BAJA', 'N')
+                ->get();
+
+            // Obtener promociones
+            $query = DB::table('CATALOGO_WEB')
+                ->where('ESTADO', 'A')
+                ->where('DISPONIBLE', 'S')
+                ->where('IND_PROMOCION', 'S');
+
+            if ($sucursalSeleccionada) {
+                $query->where('COD_SUCURSAL', $sucursalSeleccionada);
+            }
+
+            $promociones = $query->orderBy('IND_DESTACADO', 'DESC')
+                ->orderBy('ORDEN_MOSTRAR', 'ASC')
+                ->paginate(12);
+
+            return view('catalogo.promociones', compact(
+                'promociones',
+                'sucursales',
+                'sucursalSeleccionada'
+            ));
+        } catch (\Exception $e) {
+            Log::error('Error en promociones: ' . $e->getMessage());
+            return view('catalogo.promociones')->with('error', 'Error al cargar promociones');
+        }
     }
 
     /**
@@ -537,7 +845,7 @@ class CatalogoWebController extends Controller
     {
         $query = $request->get('q');
         $sucursal = $request->get('sucursal', '004');
-        
+
         if (strlen($query) < 2) {
             return response()->json([]);
         }
@@ -560,7 +868,7 @@ class CatalogoWebController extends Controller
                 'nombre' => $product->DES_ARTICULO,
                 'precio' => $product->PRECIO_MOSTRAR,
                 'url' => route('catalogo.show', [
-                    'codArticulo' => $product->COD_ARTICULO_SERV, 
+                    'codArticulo' => $product->COD_ARTICULO_SERV,
                     'sucursal' => $sucursal
                 ])
             ];
@@ -631,7 +939,7 @@ class CatalogoWebController extends Controller
     private function getEspecialidadName($codEspecialidad)
     {
         if (empty($codEspecialidad)) return null;
-        
+
         try {
             $especialidad = CveEspecialidad::select('DES_ESPECIALIDAD')
                 ->where('COD_ESPECIALIDAD', $codEspecialidad)
@@ -649,6 +957,4 @@ class CatalogoWebController extends Controller
         if (stripos($direccion, 'Comas') !== false) return 'Comas';
         return 'Lima';
     }
-
-
 }

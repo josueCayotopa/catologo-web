@@ -47,7 +47,7 @@
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:col-span-2 lg:row-span-2 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div class="flex flex-col lg:flex-row h-full">
                     <div class="lg:w-1/2 relative">
-                        <img src="/placeholder.svg?height=600&width=600" alt="Chequeo Médico Completo" class="w-full h-full object-cover">
+                        <img src="/images/general.jpg?height=600&width=600" alt="Chequeo Médico Completo" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-primary-950 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-fire mr-1"></i>MÁS POPULAR
                         </div>

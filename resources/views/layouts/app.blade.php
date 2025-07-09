@@ -160,11 +160,11 @@
                     <a href="/promociones" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
                         Promociones
                     </a>
-                    <a href="#" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
-                        Especialidades
+                    <a href="/imagen" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
+                    Imagenes
                     </a>
-                    <a href="#" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
-                        Nosotros
+                    <a href="/laboratorio" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
+                        Laboratorio
                     </a>
                 </nav>
                 

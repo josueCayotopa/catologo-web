@@ -47,7 +47,7 @@
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:col-span-2 lg:row-span-2 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div class="flex flex-col lg:flex-row h-full">
                     <div class="lg:w-1/2 relative">
-                        <img src="/images/general.jpg?height=600&width=600" alt="Chequeo Médico Completo" class="w-full h-full object-cover">
+                        <img src="/images/medicina general1.JPG?height=600&width=600" alt="Chequeo Médico Completo" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-primary-950 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-fire mr-1"></i>MÁS POPULAR
                         </div>
@@ -110,7 +110,7 @@
             <!-- Promoción Cardiología -->
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div class="relative">
-                    <img src="/placeholder.svg?height=300&width=500" alt="Cardiología" class="w-full h-48 object-cover">
+                    <img src="/images/Check Cardio Completo.jpeg?height=300&width=500" alt="Cardiología" class="w-full h-48 object-cover">
                     <div class="absolute top-4 right-4 bg-white bg-opacity-90 text-primary-950 px-3 py-1 rounded-full text-sm font-semibold">
                         <i class="fas fa-heartbeat mr-1"></i>Cardiología
                     </div>
@@ -154,7 +154,7 @@
             <!-- Promoción Ginecología -->
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div class="relative">
-                    <img src="/placeholder.svg?height=300&width=500" alt="Ginecología" class="w-full h-48 object-cover">
+                    <img src="/images/Ginecología.jpeg?height=300&width=500" alt="Ginecología" class="w-full h-48 object-cover">
                     <div class="absolute top-4 right-4 bg-white bg-opacity-90 text-primary-950 px-3 py-1 rounded-full text-sm font-semibold">
                         <i class="fas fa-female mr-1"></i>Ginecología
                     </div>
@@ -198,7 +198,7 @@
             <!-- Promoción Neurología -->
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div class="relative">
-                    <img src="/placeholder.svg?height=300&width=500" alt="Neurología" class="w-full h-48 object-cover">
+                    <img src="/images/neurologico.webp?height=300&width=500" alt="Neurología" class="w-full h-48 object-cover">
                     <div class="absolute top-4 right-4 bg-white bg-opacity-90 text-primary-950 px-3 py-1 rounded-full text-sm font-semibold">
                         <i class="fas fa-brain mr-1"></i>Neurología
                     </div>
@@ -243,7 +243,7 @@
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:col-span-2 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div class="flex flex-col md:flex-row h-full">
                     <div class="md:w-2/5 relative">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Consulta Pediátrica" class="w-full h-full object-cover">
+                        <img src="/images/pediatria.png?height=400&width=500" alt="Consulta Pediátrica" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-baby mr-1"></i>PEDIATRÍA
                         </div>

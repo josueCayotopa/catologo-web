@@ -123,80 +123,65 @@
     </div>
 
     <!-- Header Principal -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center">
-                    <a href="{{ route('catalogo.index') }}" class="flex items-center">
-                       
-                        <div>
-                            <img src="{{ asset('images/logo.png') }}" alt="Logo Clínica La Luz" class="h-10">
-                        </div>
-                    </a>
-                </div>
+    <!-- Dentro del <header>, reemplaza la navegación actual con esto: -->
+<header class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo y botón hamburguesa (mobile) -->
+            <div class="flex items-center">
+                <!-- Botón hamburguesa solo en móvil -->
+                <button id="mobileMenuButton" class="lg:hidden text-secondary-950 mr-4">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
                 
-                <!-- Buscador -->
-                <div class="hidden md:flex flex-1 max-w-lg mx-8">
-                    <div class="search-container w-full">
-                        <form action="{{ route('catalogo.index') }}" method="GET" class="relative">
-                            <input type="text" 
-                                   name="search" 
-                                   id="searchInput"
-                                   value="{{ request('search') }}"
-                                   placeholder="Buscar productos, códigos, medicamentos..." 
-                                   class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-950 focus:border-transparent">
-                            <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-950 hover:text-primary-950 transition-colors">
-                                <i class="fas fa-search text-lg"></i>
-                            </button>
-                        </form>
-                        <div id="searchResults" class="search-results"></div>
+                <a href="{{ route('catalogo.index') }}" class="flex items-center">
+                    <div>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo Clínica La Luz" class="h-10">
                     </div>
-                </div>
-                
-                <nav class="hidden lg:flex space-x-6">
-                    <a href="{{ route('catalogo.index') }}" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
-                        Inicio
-                    </a>
-                    <a href="/promociones" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
-                        Promociones
-                    </a>
-                    <a href="/imagen" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
-                    Imagenes
-                    </a>
-                    <a href="/laboratorio" class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
-                        Laboratorio
-                    </a>
-                </nav>
-                
-                <div class="flex items-center space-x-4">
-                    <button class="md:hidden text-secondary-950 hover:text-primary-950 transition-colors" onclick="toggleMobileSearch()">
-                        <i class="fas fa-search text-xl"></i>
-                    </button>
-                    {{-- <button class="text-secondary-950 hover:text-primary-950 relative transition-colors">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span class="absolute -top-2 -right-2 bg-primary-950 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </button> --}}
-                    <a href="https://citasweb.clinicalaluz.pe/ " class="btn-primary text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                        <i class="fas fa-calendar-plus mr-2"></i>AGENDAR CITA
-                    </a>
-                </div>
+                </a>
             </div>
             
-            <!-- Buscador móvil -->
-            <div id="mobileSearch" class="md:hidden pb-4 hidden">
-                <form action="{{ route('catalogo.index') }}" method="GET" class="relative">
-                    <input type="text" 
-                           name="search" 
-                           value="{{ request('search') }}"
-                           placeholder="Buscar productos..." 
-                           class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-950">
-                    <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-950">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
+            <!-- Buscador (oculto en móvil) -->
+            <div class="hidden md:flex flex-1 max-w-lg mx-8">
+                <!-- ... (mantén tu buscador actual) ... -->
+            </div>
+            
+            <!-- Navegación principal (oculta en móvil) -->
+            <nav class="hidden lg:flex space-x-6">
+                <!-- ... (mantén tus enlaces actuales) ... -->
+            </nav>
+            
+            <!-- Botones de acción -->
+            <div class="flex items-center space-x-4">
+                <!-- ... (mantén tus botones actuales) ... -->
             </div>
         </div>
-    </header>
+        
+        <!-- Menú móvil desplegable -->
+        <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-md rounded-b-lg">
+            <div class="flex flex-col py-4 px-4 space-y-3">
+                <a href="{{ route('catalogo.index') }}" class="text-secondary-950 hover:text-primary-950 font-medium py-2 transition-colors border-b border-gray-100">
+                    Inicio
+                </a>
+                <a href="/promociones" class="text-secondary-950 hover:text-primary-950 font-medium py-2 transition-colors border-b border-gray-100">
+                    Promociones
+                </a>
+                <a href="/imagen" class="text-secondary-950 hover:text-primary-950 font-medium py-2 transition-colors border-b border-gray-100">
+                    Imagenes
+                </a>
+                <a href="/laboratorio" class="text-secondary-950 hover:text-primary-950 font-medium py-2 transition-colors border-b border-gray-100">
+                    Laboratorio
+                </a>
+                <!-- Puedes añadir más elementos aquí si es necesario -->
+            </div>
+        </div>
+        
+        <!-- Buscador móvil -->
+        <div id="mobileSearch" class="md:hidden pb-4 hidden">
+            <!-- ... (mantén tu buscador móvil actual) ... -->
+        </div>
+    </div>
+</header>
 
     <!-- Main Content -->
     <main>
@@ -258,10 +243,7 @@
 
     <!-- JavaScript -->
     <script>
-        function addToCart(productCode, productName) {
-            // Mostrar notificación más elegante
-            showNotification(`${productName} agregado al carrito!`, 'success');
-        }
+        
 
         function filterProducts(category) {
             const url = new URL(window.location);
@@ -322,6 +304,27 @@
                 console.log('Buscando:', query);
             }
         });
+        // Control del menú móvil
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function toggleMobileMenu() {
+    mobileMenu.classList.toggle('hidden');
+    // Cierra el buscador móvil si está abierto
+    document.getElementById('mobileSearch').classList.add('hidden');
+}
+
+mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+// Cerrar menú al hacer clic fuera de él
+document.addEventListener('click', function(event) {
+    const isClickInsideMenu = mobileMenu.contains(event.target);
+    const isClickOnButton = event.target === mobileMenuButton || mobileMenuButton.contains(event.target);
+    
+    if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+    }
+});
     </script>
 </body>
 </html>

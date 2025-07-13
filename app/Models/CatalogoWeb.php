@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class CatalogoWeb extends Model
-{
-    protected $table = 'CATALOGO_WEB';
+{protected $table = 'CATALOGO_WEB';
     protected $primaryKey = 'COD_ARTICULO_SERV';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = true;
+    protected $keyType = 'int';
     public $timestamps = false;
 
     protected $fillable = [
-        'COD_ARTICULO_SERV',
+      'COD_EMPRESA',
         'DES_ARTICULO',
         'DES_CORTA',
         'PRECIO_MOSTRAR',
@@ -46,7 +45,7 @@ class CatalogoWeb extends Model
         'CONTRAINDICACIONES',
         'INCLUYE',
         'OBSERVACIONES',
-        'HORARIO_ESPECIAL',
+        'HORARIO_DISPONIBLE',
         'DIAS_DISPONIBLE',
         'REQUIERE_ORDEN_MEDICA',
         'ES_PAQUETE',
@@ -65,7 +64,8 @@ class CatalogoWeb extends Model
         'FECHA_FIN_PROMO' => 'date',
         'FECHA_CREACION' => 'datetime',
         'EDAD_MINIMA' => 'integer',
-        'EDAD_MAXIMA' => 'integer'
+        'EDAD_MAXIMA' => 'integer',
+
     ];
 
     protected $attributes = [
@@ -73,6 +73,7 @@ class CatalogoWeb extends Model
         'DISPONIBLE' => 'S',
         'IND_DESTACADO' => 'N',
         'IND_PROMOCION' => 'N',
+
         'MONEDA' => 'PEN',
         'ORDEN_MOSTRAR' => 999,
         'AYUNO_REQUERIDO' => 'N',
@@ -80,6 +81,14 @@ class CatalogoWeb extends Model
         'ES_PAQUETE' => 'N'
     ];
 
+
+
+    // Accessor para la imagen (existente)
+
+    public function empresa()
+    {
+        return $this->belongsTo(MaeEmpresa::class, 'COD_EMPRESA', 'COD_EMPRESA');
+    }
     // Scopes existentes
     public function scopeActivo($query)
     {
@@ -283,29 +292,8 @@ class CatalogoWeb extends Model
         return explode('|', $this->SERVICIOS_INCLUIDOS);
     }
 
-    public function getDiasDisponibleArrayAttribute()
-    {
-        if (empty($this->DIAS_DISPONIBLE)) {
-            return [];
-        }
-        return explode(',', $this->DIAS_DISPONIBLE);
-    }
 
-    public function getTagsArrayAttribute()
-    {
-        if (empty($this->TAGS)) {
-            return [];
-        }
-        return explode(',', $this->TAGS);
-    }
 
-    public function getIncluyeArrayAttribute()
-    {
-        if (empty($this->INCLUYE)) {
-            return [];
-        }
-        return explode('|', $this->INCLUYE);
-    }
 
     // Relaciones (existentes)
     public function especialidad()
@@ -326,7 +314,7 @@ class CatalogoWeb extends Model
         }
 
         $hoy = now()->toDateString();
-        
+
         if ($this->FECHA_INICIO_PROMO && $this->FECHA_FIN_PROMO) {
             return $hoy >= $this->FECHA_INICIO_PROMO && $hoy <= $this->FECHA_FIN_PROMO;
         }
@@ -336,8 +324,8 @@ class CatalogoWeb extends Model
 
     public function getPrecioFinal()
     {
-        return $this->estaEnPromocion() && $this->PRECIO_PROMOCION 
-            ? $this->PRECIO_PROMOCION 
+        return $this->estaEnPromocion() && $this->PRECIO_PROMOCION
+            ? $this->PRECIO_PROMOCION
             : $this->PRECIO_MOSTRAR;
     }
 
@@ -410,7 +398,7 @@ class CatalogoWeb extends Model
             'HECES' => ['nombre' => 'Examen de Heces', 'icono' => 'fas fa-search', 'color' => '#95a5a6'],
             'GENETICA' => ['nombre' => 'Genética', 'icono' => 'fas fa-dna', 'color' => '#e67e22'],
             'TOXICOLOGIA' => ['nombre' => 'Toxicología', 'icono' => 'fas fa-exclamation-triangle', 'color' => '#e74c3c'],
-            
+
             // Imagen
             'RADIOGRAFIA' => ['nombre' => 'Radiografía', 'icono' => 'fas fa-x-ray', 'color' => '#34495e'],
             'ECOGRAFIA' => ['nombre' => 'Ecografía', 'icono' => 'fas fa-heartbeat', 'color' => '#3498db'],
@@ -437,15 +425,9 @@ class CatalogoWeb extends Model
             if (!$model->FECHA_CREACION) {
                 $model->FECHA_CREACION = now();
             }
-            
-            if (!$model->COD_ARTICULO_SERV) {
-                $model->COD_ARTICULO_SERV = 'ART' . time() . rand(100, 999);
-            }
 
-            // Auto-generar URL amigable si no existe
-            if (!$model->URL_AMIGABLE) {
-                $model->URL_AMIGABLE = \Str::slug($model->DES_ARTICULO);
-            }
+
+
 
             // Auto-generar meta title si no existe
             if (!$model->META_TITLE) {

@@ -34,11 +34,8 @@ class MaeEmpresa extends Model
 
     ];
 
-    
-    public function ubigeo()
-    {
-        return $this->belongsTo(MaeUbigeo::class, 'COD_UBIGEO', 'COD_UBIGEO');
-    }
+
+
 
     public function pais()
     {
@@ -52,7 +49,7 @@ class MaeEmpresa extends Model
     {
         return $this->belongsTo(MaeMoneda::class, 'COD_MONEDA_SECUN', 'COD_MONEDA');
     }
-    
+
 
     // Relación con Sucursales
     public function sucursales()
@@ -61,8 +58,8 @@ class MaeEmpresa extends Model
     }
 
     // Relación con Usuarios
-    public function usuarios()
-    {
-        return $this->hasMany(MaeUsuario::class, 'COD_EMPRESA', 'COD_EMPRESA');
-    }
+    // public function usuarios()
+    // {
+    //     return $this->hasMany(MaeUsuario::class, 'COD_EMPRESA', 'COD_EMPRESA');
+    // }
 }

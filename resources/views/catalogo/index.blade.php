@@ -41,7 +41,7 @@
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">Aprovecha nuestras ofertas exclusivas por tiempo limitado</p>
         </div>
-        
+
         <!-- Carrusel de Promociones Mejorado -->
         <div class="relative max-w-5xl mx-auto">
             <!-- Contenedor del Carrusel -->
@@ -58,7 +58,7 @@
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-secondary-950 mb-2">Chequeo Médico General I</h3>
-                                
+
                                 <div class="bg-gray-50 rounded-lg p-3 mb-4">
                                     <ul class="space-y-1 text-sm">
                                         <li class="flex items-center">
@@ -79,7 +79,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <div class="flex items-center justify-between mb-4">
                                     <div>
                                         <span class="text-2xl font-bold text-primary-950">S/. 124</span>
@@ -89,14 +89,14 @@
                                         17% DSCTO
                                     </span>
                                 </div>
-                                
+
                                 <a href="https://wa.me/51993521429?text=Hola,%20me%20interesa%20el%20Chequeo%20Médico%20General%20I" target="_blank" class="w-full bg-primary-950 text-white py-2 px-4 rounded-lg font-semibold text-center block hover:bg-opacity-90 transition-colors">
                                     <i class="fas fa-calendar-plus mr-2"></i>Reservar Ahora
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Slide 2: Cardiología -->
                     <div class="promo-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] p-3">
                         <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full border border-gray-100 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -108,7 +108,7 @@
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-secondary-950 mb-2">Check Cardio Completo</h3>
-                                
+
                                 <div class="bg-gray-50 rounded-lg p-3 mb-4">
                                     <ul class="space-y-1 text-sm">
                                         <li class="flex items-center">
@@ -129,20 +129,20 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <div class="flex items-center justify-between mb-4">
                                     <div>
                                         <span class="text-2xl font-bold text-primary-950">S/. 300</span>
                                     </div>
                                 </div>
-                                
+
                                 <a href="tel:+51993521429" class="w-full bg-secondary-950 text-white py-2 px-4 rounded-lg font-semibold text-center block hover:bg-opacity-90 transition-colors">
                                     <i class="fas fa-phone mr-2"></i>Llamar para reservar
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Slide 3: Ginecología -->
                     <div class="promo-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] p-3">
                         <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full border border-gray-100 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -154,7 +154,7 @@
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-secondary-950 mb-2">Consulta Ginecológica</h3>
-                                
+
                                 <div class="bg-gray-50 rounded-lg p-3 mb-4">
                                     <ul class="space-y-1 text-sm">
                                         <li class="flex items-center">
@@ -171,7 +171,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <div class="flex items-center justify-between mb-4">
                                     <div>
                                         <span class="text-2xl font-bold text-primary-950">S/. 240</span>
@@ -181,14 +181,14 @@
                                         20% DSCTO
                                     </span>
                                 </div>
-                                
+
                                 <a href="https://wa.me/51993521429?text=Hola,%20me%20interesa%20la%20consulta%20ginecológica" target="_blank" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold text-center block hover:bg-green-700 transition-colors">
                                     <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Slide 4: Neurología -->
                     <div class="promo-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] p-3">
                         <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full border border-gray-100 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -200,7 +200,7 @@
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-secondary-950 mb-2">Check Neurológico</h3>
-                                
+
                                 <div class="bg-gray-50 rounded-lg p-3 mb-4">
                                     <ul class="space-y-1 text-sm">
                                         <li class="flex items-center">
@@ -213,7 +213,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <div class="flex items-center justify-between mb-4">
                                     <div>
                                         <span class="text-2xl font-bold text-primary-950">S/. 150</span>
@@ -223,7 +223,7 @@
                                         25% DSCTO
                                     </span>
                                 </div>
-                                
+
                                 <a href="https://citasweb.clinicalaluz.pe/" target="_blank" class="w-full bg-secondary-950 text-white py-2 px-4 rounded-lg font-semibold text-center block hover:bg-opacity-90 transition-colors">
                                     <i class="fas fa-calendar-check mr-2"></i>Agendar cita
                                 </a>
@@ -232,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Controles de Navegación -->
             <button id="prev-slide" class="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-100 transition-colors z-10">
                 <i class="fas fa-chevron-left text-secondary-950"></i>
@@ -240,7 +240,7 @@
             <button id="next-slide" class="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-100 transition-colors z-10">
                 <i class="fas fa-chevron-right text-secondary-950"></i>
             </button>
-            
+
             <!-- Indicadores de Slides -->
             <div class="flex justify-center mt-6 space-x-2">
                 <button class="slide-indicator w-3 h-3 rounded-full bg-primary-950 opacity-100" data-slide="0"></button>
@@ -249,7 +249,7 @@
                 <button class="slide-indicator w-3 h-3 rounded-full bg-gray-300 opacity-50" data-slide="3"></button>
             </div>
         </div>
-        
+
         <!-- Call to Action -->
         <div class="text-center mt-12">
             <p class="text-gray-600 mb-4">¿Necesitas más información sobre nuestras promociones?</p>
@@ -272,7 +272,7 @@
             <h3 class="text-lg font-semibold text-secondary-950 mb-4">Seleccionar Sucursal:</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach($sucursales as $suc)
-                    <a href="{{ route('catalogo.index', array_merge(request()->query(), ['sucursal' => $suc->COD_SUCURSAL])) }}" 
+                    <a href="{{ route('catalogo.index', array_merge(request()->query(), ['sucursal' => $suc->COD_SUCURSAL])) }}"
                        class="p-4 rounded-lg border-2 transition-all {{ $sucursal === $suc->COD_SUCURSAL ? 'border-primary-950 bg-red-50' : 'border-gray-200 hover:border-secondary-950 hover:bg-blue-50' }}">
                         <div class="text-center">
                             <h4 class="font-semibold text-secondary-950">{{ $suc->NOM_SUCURSAL }}</h4>
@@ -289,16 +289,16 @@
         </div>
 
         <!-- Filtros por Especialidad - SOLO ESPECIALIDADES DISPONIBLES -->
-        @if(!empty($especialidades) && $especialidades->count() > 0)
+        @if( $especialidades->count() > 0)
             <div class="mb-6">
                 <h3 class="text-lg font-semibold text-secondary-950 mb-4">Filtrar por Especialidad:</h3>
                 <div class="flex flex-wrap gap-3">
-                    <button onclick="filterByEspecialidad('all')" 
+                    <button onclick="filterByEspecialidad('all')"
                             class="px-4 py-2 rounded-full border-2 transition-colors {{ !$especialidad || $especialidad === 'all' ? 'border-primary-950 bg-primary-950 text-white' : 'border-gray-300 text-gray-700 hover:border-primary-950 hover:text-primary-950' }}">
                         Todas las Especialidades
                     </button>
                     @foreach($especialidades as $esp)
-                        <button onclick="filterByEspecialidad('{{ $esp->COD_ESPECIALIDAD }}')" 
+                        <button onclick="filterByEspecialidad('{{ $esp->COD_ESPECIALIDAD }}')"
                                 class="px-4 py-2 rounded-full border-2 transition-colors flex items-center {{ $especialidad === $esp->COD_ESPECIALIDAD ? 'text-white' : 'text-gray-700 hover:border-secondary-950 hover:text-secondary-950' }}"
                                 style="{{ $especialidad === $esp->COD_ESPECIALIDAD ? 'background-color: ' . $esp->COLOR . '; border-color: ' . $esp->COLOR : 'border-color: #d1d5db' }}">
                             @if($esp->ICONO)
@@ -310,6 +310,7 @@
                 </div>
             </div>
         @endif
+
     </div>
 </section>
 
@@ -324,7 +325,7 @@
                     </h3>
                     <p class="text-gray-600">{{ $products->total() }} servicios encontrados en {{ $sucursalActual->NOM_SUCURSAL ?? 'esta sucursal' }}</p>
                 </div>
-                <a href="{{ route('catalogo.index', ['sucursal' => $sucursal]) }}" 
+                <a href="{{ route('catalogo.index', ['sucursal' => $sucursal]) }}"
                    class="text-secondary-950 hover:text-primary-950 font-medium transition-colors">
                     <i class="fas fa-times mr-1"></i>Limpiar búsqueda
                 </a>
@@ -332,7 +333,6 @@
         </div>
     </section>
 @endif
-
 <!-- Catálogo de Servicios Médicos -->
 <section id="servicios" class="py-16">
     <div class="container mx-auto px-4">
@@ -348,7 +348,6 @@
                 Mostrando {{ $products->count() }} de {{ $products->total() }} servicios disponibles
             </p>
         </div>
-
         @if($products->count() > 0)
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
                 @foreach($products as $product)
@@ -368,10 +367,10 @@
                         </div>
 
                         <div class="relative">
-                            <img src="{{ $product['image'] }}" 
-                                 alt="{{ $product['nombre'] }}" 
+                            <img src="{{ $product['image'] }}"
+                                 alt="{{ $product['nombre'] }}"
                                  class="w-full h-48 object-cover">
-                            
+
                             <!-- Tipo de servicio -->
                             <div class="absolute bottom-4 right-4">
                                 <span class="bg-white bg-opacity-90 text-secondary-950 px-3 py-1 rounded-full text-xs font-semibold">
@@ -379,7 +378,7 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="p-6">
                             <!-- Especialidad -->
                             @if($product['especialidad'])
@@ -393,16 +392,16 @@
                                     </span>
                                 </div>
                             @endif
-                            
+
                             <div class="mb-2">
                                 <span class="text-xs text-secondary-950 bg-blue-50 px-2 py-1 rounded-full">
                                     Código: {{ $product['codigo'] }}
                                 </span>
                             </div>
-                            
+
                             <h3 class="text-xl font-bold text-secondary-950 mb-2">{{ $product['nombre'] }}</h3>
                             <p class="text-gray-600 mb-4 text-sm line-clamp-2">{{ Str::limit($product['descripcion'], 80) }}</p>
-                            
+
                             <!-- Información del servicio -->
                             <div class="mb-4 space-y-2">
                                 <div class="flex items-center text-sm text-gray-600">
@@ -416,7 +415,7 @@
                                     </div>
                                 @endif
                             </div>
-                            
+
                             <!-- Precio -->
                             <div class="mb-4">
                                 @if($product['promocion'] && $product['precio_promocion'])
@@ -437,16 +436,16 @@
                                     </span>
                                 @endif
                             </div>
-                            
+
                             <!-- Botones de acción -->
                             <div class="flex gap-2">
-                                <a href="{{ route('catalogo.show', ['codArticulo' => $product['codigo'], 'sucursal' => $sucursal]) }}" 
+                                <a href="{{ route('catalogo.show', ['codArticulo' => $product['codigo'], 'sucursal' => $sucursal]) }}"
                                    class="flex-1 btn-primary text-white py-2 px-4 rounded-lg font-semibold text-sm transition-colors">
                                     <div class="flex items-center justify-center">
                                         <i class="fas fa-info-circle mr-2"></i>Ver Detalles
                                     </div>
                                 </a>
-                                <a href="https://citasweb.clinicalaluz.pe/" 
+                                <a href="https://citasweb.clinicalaluz.pe/"
                                    target="_blank"
                                    class="btn-secondary text-white py-2 px-4 rounded-lg transition-colors">
                                     <i class="fas fa-calendar-plus"></i>
@@ -470,7 +469,7 @@
                 <p class="text-gray-500 mb-4">
                     No hay servicios médicos disponibles con los filtros seleccionados
                 </p>
-                <a href="{{ route('catalogo.index', ['sucursal' => $sucursal]) }}" 
+                <a href="{{ route('catalogo.index', ['sucursal' => $sucursal]) }}"
                    class="btn-secondary text-white px-6 py-3 rounded-lg transition-colors">
                     Ver todos los servicios
                 </a>
@@ -515,11 +514,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('prev-slide');
     const nextBtn = document.getElementById('next-slide');
     const indicators = document.querySelectorAll('.slide-indicator');
-    
+
     let currentSlide = 0;
     let slideWidth = 100;
     let slidesToShow = 1;
-    
+
     // Determinar cuántos slides mostrar según el ancho de la pantalla
     function updateSlidesToShow() {
         if (window.innerWidth >= 1024) {
@@ -529,17 +528,17 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             slidesToShow = 1; // Mobile
         }
-        
+
         slideWidth = 100 / slidesToShow;
         updateSlider();
     }
-    
+
     // Actualizar la posición del slider
     function updateSlider() {
         if (slider) {
             slider.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
         }
-        
+
         // Actualizar indicadores
         indicators.forEach((indicator, index) => {
             if (index === currentSlide) {
@@ -553,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Event listeners para los botones
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
@@ -563,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             if (currentSlide < slides.length - slidesToShow) {
@@ -572,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Event listeners para los indicadores
     indicators.forEach((indicator, index) => {
         indicator.addEventListener('click', () => {
@@ -580,13 +579,13 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSlider();
         });
     });
-    
+
     // Actualizar al cambiar el tamaño de la ventana
     window.addEventListener('resize', updateSlidesToShow);
-    
+
     // Inicializar
     updateSlidesToShow();
-    
+
     // Auto-play del slider
     setInterval(() => {
         if (currentSlide < slides.length - slidesToShow) {
@@ -629,7 +628,7 @@ if (sliderElement) {
 function handleSwipe() {
     const swipeThreshold = 50;
     const diff = startX - endX;
-    
+
     if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
             // Swipe left - next slide
@@ -710,11 +709,11 @@ function handleSwipe() {
     .promo-slide .p-6 {
         padding: 1rem;
     }
-    
+
     .promo-slide h3 {
         font-size: 1rem;
     }
-    
+
     .promo-slide .text-2xl {
         font-size: 1.25rem;
     }
@@ -724,7 +723,7 @@ function handleSwipe() {
     .promo-slide .p-6 {
         padding: 0.75rem;
     }
-    
+
     .promo-slide h3 {
         font-size: 0.875rem;
     }

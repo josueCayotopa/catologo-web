@@ -82,9 +82,8 @@
                 @if($tipo_estudio)
                     <input type="hidden" name="tipo_estudio" value="{{ $tipo_estudio }}">
                 @endif
-                
                 <div class="flex-1">
-                    <input type="text" name="search" value="{{ $search }}" 
+                    <input type="text" name="search" value="{{ $search }}"
                            placeholder="Buscar estudios de imagen..."
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
                 </div>
@@ -92,7 +91,7 @@
                     <i class="fas fa-search"></i>
                 </button>
                 @if($search)
-                    <a href="{{ route('catalogo.imagen', ['sucursal' => $sucursal, 'tipo_estudio' => $tipo_estudio]) }}" 
+                    <a href="{{ route('catalogo.imagen', ['sucursal' => $sucursal, 'tipo_estudio' => $tipo_estudio]) }}"
                        class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
                         <i class="fas fa-times"></i>
                     </a>
@@ -141,7 +140,7 @@
                         <img src="{{ $estudio->IMAGEN_URL ?? '/placeholder.svg?height=200&width=400&text=Estudio+de+Imagen' }}"
                               alt="{{ $estudio->DES_ARTICULO }}"
                               class="w-full h-48 object-cover">
-                        
+
                         <div class="absolute top-4 left-4">
                             <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                                 <i class="fas fa-star mr-1"></i>Destacado
@@ -234,7 +233,7 @@
                             <img src="{{ $estudio->IMAGEN_URL ?? '/placeholder.svg?height=160&width=300&text=Estudio+de+Imagen' }}"
                                   alt="{{ $estudio->DES_ARTICULO }}"
                                   class="w-full h-40 object-cover">
-                            
+
                             <!-- Categoría -->
                             <div class="absolute bottom-4 right-4">
                                 <span class="bg-white bg-opacity-90 text-secondary-950 px-3 py-1 rounded-full text-xs font-semibold flex items-center">
@@ -340,7 +339,7 @@
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-secondary-950 mb-4">¿Por qué elegir nuestros estudios de imagen?</h2>
         </div>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="text-center">
                 <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -379,7 +378,7 @@
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-4">¿Necesitas un estudio de imagen?</h2>
         <p class="text-xl mb-8 opacity-90">Agenda tu cita o solicita información</p>
-        
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+51993521429" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                 <i class="fas fa-phone mr-2"></i>Llamar Ahora

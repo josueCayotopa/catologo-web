@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CatalogoWebResource\Pages;
 use App\Models\CatalogoWeb;
 use App\Models\MaeSucursal;
+use App\Models\MaeEmpresa;
 use App\Models\CveEspecialidad;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -46,8 +47,17 @@ class CatalogoWebResource extends Resource
             Section::make('Información Básica')
                 ->schema([
                     Grid::make(2)->schema([
-                   
 
+
+                        Select::make('COD_EMPRESA')
+                            ->label('Empresa')
+                            ->required()
+                            ->options(function () {
+                                return MaeEmpresa::where('IND_BAJA', 'N')
+                                    ->pluck('DES_RAZON_SOCIAL', 'COD_EMPRESA');
+                            })
+                            ->default('0001')
+                            ->searchable(),
                         Select::make('COD_SUCURSAL')
                             ->label('Sucursal')
                             ->required()
@@ -55,6 +65,7 @@ class CatalogoWebResource extends Resource
                                 return MaeSucursal::where('IND_BAJA', 'N')
                                     ->pluck('NOM_SUCURSAL', 'COD_SUCURSAL');
                             })
+                            ->default('004')
                             ->searchable(),
                     ]),
 
@@ -135,6 +146,7 @@ class CatalogoWebResource extends Resource
                                     default => []
                                 };
                             })
+                            ->required()
                             ->reactive(),
 
                         Select::make('COD_ESPECIALIDAD')
@@ -146,10 +158,6 @@ class CatalogoWebResource extends Resource
                             ->searchable(),
                     ]),
 
-                    TextInput::make('TIPO_SERVICIO')
-                        ->label('Tipo de Servicio')
-                        ->maxLength(100)
-                        ->default('Servicio Médico'),
                 ]),
 
             Section::make('Precios y Promociones')
@@ -224,7 +232,9 @@ class CatalogoWebResource extends Resource
 
                         TagsInput::make('DIAS_DISPONIBLE')
                             ->label('Días Disponibles')
-                            ->suggestions(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']),
+                            ->suggestions(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'])
+                            ->separator(','), // Asegúrate de que use comas como separador
+
                     ]),
 
                     TextInput::make('ORDEN_MOSTRAR')
@@ -343,9 +353,9 @@ class CatalogoWebResource extends Resource
                         ->directory('servicios')
                         ->maxSize(2048),
 
-                    TagsInput::make('PALABRAS_CLAVE')
-                        ->label('Palabras Clave (SEO)')
-                        ->placeholder('Agregar palabras clave separadas por comas'),
+                    // TagsInput::make('PALABRAS_CLAVE')
+                    //     ->label('Palabras Clave (SEO)')
+                    //     ->placeholder('Agregar palabras clave separadas por comas'),
 
                     Grid::make(2)->schema([
                         TextInput::make('STOCK_DISPONIBLE')
@@ -372,10 +382,7 @@ class CatalogoWebResource extends Resource
     {
         return $table
             ->columns([
-                // TextColumn::make('COD_ARTICULO_SERV')
-                //     ->label('Código')
-                //     ->searchable()
-                //     ->sortable(),
+
 
                 ImageColumn::make('IMAGEN_URL')
                     ->label('Imagen')
@@ -512,7 +519,7 @@ class CatalogoWebResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    
+
                     BulkAction::make('activar')
                         ->label('Activar Servicios')
                         ->icon('heroicon-o-check-circle')
@@ -592,7 +599,7 @@ class CatalogoWebResource extends Resource
         return [
             'index' => Pages\ListCatalogoWebs::route('/'),
             'create' => Pages\CreateCatalogoWeb::route('/create'),
-         
+
             'edit' => Pages\EditCatalogoWeb::route('/{record}/edit'),
         ];
     }
